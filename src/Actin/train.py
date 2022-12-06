@@ -134,7 +134,7 @@ if __name__ == "__main__":
                         help="Sets the number of repetitions")
     args = parser.parse_args()
 
-    PATH = "./MICRA-Net"
+    PATH = os.path.expanduser( "~/Downloads/MICRA-Net")
 
     add_to_seed = -1
     for _ in range(args.num):
