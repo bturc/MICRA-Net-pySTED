@@ -81,5 +81,5 @@ if __name__ == "__main__":
     print(img.shape)
     for i in range(img.shape[0]):
         print(i)
-        plt.imshow(img[i])
+        plt.imshow(img[i], cmap="hot")
         plt.show()
