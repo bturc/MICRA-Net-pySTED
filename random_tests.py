@@ -84,5 +84,7 @@ if __name__ == "__main__":
     for i in range(img.shape[0]):
         print(i)
         print(numpy.max(img[i]), numpy.min(img[i]))
-        plt.imshow(img[i], cmap="hot")
+        fig, axes = plt.subplots(1, 2)
+        axes[0].imshow(img[i], cmap="hot")
+        axes[1].imshow(segmentation[i])
         plt.show()
