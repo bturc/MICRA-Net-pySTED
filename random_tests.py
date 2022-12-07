@@ -72,5 +72,7 @@ if __name__ == "__main__":
     train_dataset = loader.HDF5Dataset(trainer_params["hdf5_training_path"], **trainer_params)
     train_loader = DataLoader(train_dataset, **trainer_params["dataloader_params"])
 
-    print(train_dataset)
-    print(train_loader)
+    it = iter(train_loader)
+    first = next(it)
+    print(first)
+    print(type(first))
