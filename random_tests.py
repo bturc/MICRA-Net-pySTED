@@ -57,7 +57,7 @@ if __name__ == "__main__":
             "num_workers": 4,
             "pin_memory": True,
             "drop_last": True,
-            "batch_size": 32,
+            "batch_size": 1,
         },
         "model_params": {
             "num_classes": 2,
