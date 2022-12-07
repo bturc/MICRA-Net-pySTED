@@ -82,9 +82,8 @@ if __name__ == "__main__":
     segmentation = first[1].numpy
     print(img.shape)
     for i in range(img.shape[0]):
-        print(i)
-        print(numpy.max(img[i]), numpy.min(img[i]))
+        print(type(segmentation[i]))
         fig, axes = plt.subplots(1, 2)
         axes[0].imshow(img[i], cmap="hot")
-        axes[1].imshow(segmentation[i])
+        # axes[1].imshow(segmentation[i])
         plt.show()
