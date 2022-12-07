@@ -79,7 +79,7 @@ if __name__ == "__main__":
     first = next(it)
     print(len(first))
     img = first[0].numpy()
-    segmentation = first[1].numpy
+    segmentation = first[1].numpy()
     print(img.shape)
     for i in range(img.shape[0]):
         print(type(segmentation[i]))
