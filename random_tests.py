@@ -10,7 +10,9 @@ from torch.utils.data import DataLoader
 
 if __name__ == "__main__":
     import argparse
+    import matplotlib
     from matplotlib import pyplot as plt
+    matplotlib.use('tkagg')
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--dry-run", action="store_true",
