@@ -77,5 +77,7 @@ if __name__ == "__main__":
     first = next(it)
     img = first[0].numpy()
     print(img.shape)
-    plt.imshow(img)
-    plt.show()
+    for i in range(img.shape[0]):
+        print(i)
+        plt.imshow(img[i])
+        plt.show()
