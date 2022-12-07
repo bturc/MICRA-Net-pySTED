@@ -10,6 +10,7 @@ from torch.utils.data import DataLoader
 
 if __name__ == "__main__":
     import argparse
+    from matplotlib import pyplot as plt
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--dry-run", action="store_true",
@@ -74,5 +75,7 @@ if __name__ == "__main__":
 
     it = iter(train_loader)
     first = next(it)
-    print(first)
-    print(type(first))
+    img = first[0].numpy()
+    print(img.shape)
+    plt.imshow(img)
+    plt.show()
