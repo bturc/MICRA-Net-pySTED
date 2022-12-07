@@ -46,7 +46,7 @@ if __name__ == "__main__":
         "lr": lr,
         "epochs": epochs,
         "cuda": torch.cuda.is_available(),
-        "data_aug": 0.5,
+        # "data_aug": 0.5,
         "step": 0.75,
         "pos_weight": pos_weight,
         "hdf5_training_path": hdf5_training_path,
