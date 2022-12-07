@@ -53,7 +53,7 @@ if __name__ == "__main__":
         "hdf5_validation_path": hdf5_validation_path,
         "hdf5_testing_path": hdf5_testing_path,
         "dataloader_params": {
-            "shuffle": True,
+            "shuffle": False,
             "num_workers": 4,
             "pin_memory": True,
             "drop_last": True,
@@ -84,6 +84,6 @@ if __name__ == "__main__":
     for i in range(img.shape[0]):
         print(segmentation[i])
         fig, axes = plt.subplots(1, 1)
-        axes[0].imshow(img[i], cmap="hot")
+        axes.imshow(img[i], cmap="hot")
         # axes[1].imshow(segmentation[i])
         plt.show()
