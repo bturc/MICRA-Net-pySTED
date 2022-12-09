@@ -13,10 +13,10 @@ img5 = np.load(data_path + "/2804_EXP201a_58_1536_384.npz")
 
 fig, axes = plt.subplots(3, 3)
 
-axes[0, 0].imshow(img1, cmap="hot")
-axes[0, 1].imshow(img2, cmap="hot")
-axes[0, 2].imshow(img3, cmap="hot")
-axes[1, 0].imshow(img4, cmap="hot")
-axes[1, 1].imshow(img5, cmap="hot")
+axes[0, 0].imshow(img1[0], cmap="hot")
+axes[0, 1].imshow(img2[0], cmap="hot")
+axes[0, 2].imshow(img3[0], cmap="hot")
+axes[1, 0].imshow(img4[0], cmap="hot")
+axes[1, 1].imshow(img5[0], cmap="hot")
 
 plt.show()
