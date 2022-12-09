@@ -11,6 +11,10 @@ img3 = np.load(data_path + "/2802_EXP201a_58_1152_384.npz")
 img4 = np.load(data_path + "/2803_EXP201a_58_1344_384.npz")
 img5 = np.load(data_path + "/2804_EXP201a_58_1536_384.npz")
 
+for k in img1.files:
+    print(k)
+exit()
+
 fig, axes = plt.subplots(3, 3)
 
 axes[0, 0].imshow(img1[0], cmap="hot")
