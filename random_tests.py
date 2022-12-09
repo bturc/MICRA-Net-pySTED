@@ -74,17 +74,17 @@ if __name__ == "__main__":
 
     train_dataset = loader.HDF5Dataset(trainer_params["hdf5_training_path"], **trainer_params)
     train_loader = DataLoader(train_dataset, **trainer_params["dataloader_params"])
-    valid_dataset = loader.HDF5Dataset(trainer_params["hdf5_validation_path"], validation=True, **trainer_params)
-    valid_loader = DataLoader(valid_dataset, **trainer_params["dataloader_params"])
-    test_dataset = loader.HDF5Dataset(trainer_params["hdf5_testing_path"], **trainer_params)
-    test_loader = DataLoader(test_dataset, **trainer_params["dataloader_params"])
+    # valid_dataset = loader.HDF5Dataset(trainer_params["hdf5_validation_path"], validation=True, **trainer_params)
+    # valid_loader = DataLoader(valid_dataset, **trainer_params["dataloader_params"])
+    # test_dataset = loader.HDF5Dataset(trainer_params["hdf5_testing_path"], **trainer_params)
+    # test_loader = DataLoader(test_dataset, **trainer_params["dataloader_params"])
 
     new_dataset_path = os.path.expanduser("~/Documents/a22_docs/micranet_dataset_test")
     if not os.path.exists(new_dataset_path):
         os.mkdir(new_dataset_path)
 
-    for idx, img in enumerate(train_dataset):
-        img = img[0].numpy()
-        numpy.savez(new_dataset_path + f"/{idx}", img)
+    for idx, data in enumerate(train_dataset):
+        img = data[0].numpy()
+        numpy.savez(new_dataset_path + f"/{idx}_{data[-1]}", img)
 
 
