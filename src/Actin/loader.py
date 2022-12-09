@@ -97,7 +97,7 @@ class HDF5Dataset(Dataset):
 
         x = torch.tensor(image, dtype=torch.float32)
         y = torch.tensor(label, dtype=torch.float32)
-        return x, y
+        return x, y, group_name
 
     def __len__(self):
         return len(self.samples)
