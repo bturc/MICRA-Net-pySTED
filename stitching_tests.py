@@ -6,10 +6,10 @@ from matplotlib import pyplot as plt
 data_path = os.path.expanduser("~/Documents/a22_docs/micranet_dataset_test")
 
 img1 = np.load(data_path + "/2800_EXP201a_58_960_192.npz")
-img2 = np.load(data_path + "/2800_EXP201a_58_960_384.npz")
-img3 = np.load(data_path + "/2800_EXP201a_58_1152_384.npz")
-img4 = np.load(data_path + "/2800_EXP201a_58_1344_384.npz")
-img5 = np.load(data_path + "/2800_EXP201a_58_1536_384.npz")
+img2 = np.load(data_path + "/2801_EXP201a_58_960_384.npz")
+img3 = np.load(data_path + "/2802_EXP201a_58_1152_384.npz")
+img4 = np.load(data_path + "/2803_EXP201a_58_1344_384.npz")
+img5 = np.load(data_path + "/2804_EXP201a_58_1536_384.npz")
 
 fig, axes = plt.subplots(3, 3)
 
