@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     hdf5_training_path = f"{PATH}/datasets/training_01-04-19.hdf5"
     hdf5_validation_path = f"{PATH}/datasets/validation_01-04-19.hdf5"
-    hdf5_testing_path = f"{PATH}/datasets/training_01-04-19.hdf5"
+    hdf5_testing_path = f"{PATH}/datasets/testing_01-04-19.hdf5"
 
     lr, epochs, min_valid_loss = 1e-3, 250 if not args.dry_run else 1, numpy.inf
     pos_weight = [3.3, 1.6]
