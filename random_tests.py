@@ -76,9 +76,9 @@ if __name__ == "__main__":
     train_loader = DataLoader(train_dataset, **trainer_params["dataloader_params"])
 
     print(len(train_dataset))
-    for i in train_dataset:
-        print(i[0].shape)
-    exit()
+    # for i in train_dataset:
+    #     print(i[0].shape)
+    # exit()
 
     it = iter(train_loader)
     first = next(it)
