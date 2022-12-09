@@ -79,23 +79,6 @@ if __name__ == "__main__":
     test_dataset = loader.HDF5Dataset(trainer_params["hdf5_testing_path"], **trainer_params)
     test_loader = DataLoader(test_dataset, **trainer_params["dataloader_params"])
 
-    print(f"n images train : {len(train_dataset)}")
-    print(f"n images valid : {len(valid_dataset)}")
-    print(f"n images test : {len(test_dataset)}")
-    # for i in train_dataset:
-    #     print(i[0].shape)
-    exit()
+    for i in train_dataset:
+        print(i[0].shape)
 
-    it = iter(train_loader)
-    first = next(it)
-    print(len(first))
-    img = first[0].numpy()
-    segmentation = first[1].numpy()
-    print(img.shape)
-    for i in range(img.shape[0]):
-        print(segmentation[i])
-        print(numpy.max(img[i]), numpy.min(img[i]))
-        fig, axes = plt.subplots(1, 1)
-        axes.imshow(img[i], cmap="hot")
-        # axes[1].imshow(segmentation[i])
-        plt.show()
