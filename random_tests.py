@@ -85,6 +85,8 @@ if __name__ == "__main__":
 
     for idx, data in enumerate(train_dataset):
         img = data[0].numpy()
-        numpy.savez(new_dataset_path + f"/{idx}_{data[2]}_{data[3]}_{data[4]}_{data[5]}", img)
+        img_normalized = (img - numpy.min(img)) / (numpy.max(img) - numpy.min(img))
+        numpy.savez(new_dataset_path + f"/{idx}.npz", img_normalized)
+        os.rename(new_dataset_path + f"/{idx}.npz", new_dataset_path + f"/{str(idx)}")
 
 
