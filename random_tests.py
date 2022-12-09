@@ -74,11 +74,17 @@ if __name__ == "__main__":
 
     train_dataset = loader.HDF5Dataset(trainer_params["hdf5_training_path"], **trainer_params)
     train_loader = DataLoader(train_dataset, **trainer_params["dataloader_params"])
+    valid_dataset = loader.HDF5Dataset(trainer_params["hdf5_validation_path"], validation=True, **trainer_params)
+    valid_loader = DataLoader(valid_dataset, **trainer_params["dataloader_params"])
+    test_dataset = loader.HDF5Dataset(trainer_params["hdf5_testing_path"], **trainer_params)
+    test_loader = DataLoader(test_dataset, **trainer_params["dataloader_params"])
 
-    print(len(train_dataset))
+    print(f"n images train : {len(train_dataset)}")
+    print(f"n images valid : {len(valid_dataset)}")
+    print(f"n images test : {len(test_dataset)}")
     # for i in train_dataset:
     #     print(i[0].shape)
-    # exit()
+    exit()
 
     it = iter(train_loader)
     first = next(it)
