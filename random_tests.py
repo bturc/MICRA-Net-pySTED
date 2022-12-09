@@ -76,8 +76,8 @@ if __name__ == "__main__":
     train_loader = DataLoader(train_dataset, **trainer_params["dataloader_params"])
 
     # print(train_loader[0])
-    # print(train_dataset[0])
-    # exit()
+    print(train_dataset[0])
+    exit()
 
     it = iter(train_loader)
     first = next(it)
