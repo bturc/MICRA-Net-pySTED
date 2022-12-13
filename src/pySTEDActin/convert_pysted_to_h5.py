@@ -21,9 +21,8 @@ with h5py.File(h5file,'w') as  h5f:
     img_ds = h5f.create_dataset('images',shape=(nfiles, IMG_WIDTH, IMG_HEIGHT), dtype=float)
     for cnt, ifile in enumerate(glob.iglob(pySTED_acqs_path)):
         img = np.load(ifile)
-        print(np.max(img), np.min(img))
-        exit()
-        img_ds[cnt:cnt + 1:, :, :] = img
+        img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
+        img_ds[cnt:cnt + 1:, :, :] = img_normalized
         #### img = cv2.imread(ifile, cv2.IMREAD_COLOR)
         # or use cv2.IMREAD_GRAYSCALE, cv2.IMREAD_UNCHANGED
         #### img_resize = cv2.resize( img, (IMG_WIDTH, IMG_HEIGHT) )
