@@ -74,7 +74,7 @@ with h5py.File(h5file, 'w') as h5f:
         img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
 
         og_img_data = train_dataset[cnt]
-        print(og_img_data[-1], cnt)
+        print(og_img_data[1], cnt)
 
         img_ds[cnt:cnt + 1:, :, :, 0] = img_normalized
 
