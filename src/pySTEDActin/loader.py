@@ -138,17 +138,18 @@ class pySTEDHDF5Dataset(Dataset):
         samples = []
         with h5py.File(self.file_path, "r") as file:
             for group_name, group in tqdm(file.items(), desc="Groups", leave=False):
-                data = group[()].astype(numpy.float32) # Images
+                data = group[()].astype(numpy.float32)  # Images
                 print(data.shape)
-                #### label = group["label"][()] # shape is Rings, Fibers, and Dendrite
-                #### shapes = group["label"].attrs["shapes"] # Not all images have same shape
+                exit()
+                label = group["label"][()]  # shape is Rings, Fibers, and Dendrite
+                shapes = group["label"].attrs["shapes"]  # Not all images have same shape
                 for k, (dendrite_mask, shape) in enumerate(zip(label[:, -1], shapes)):
                     for j in range(0, shape[0], int(self.size * self.step)):
                         for i in range(0, shape[1], int(self.size * self.step)):
-                            dendrite = dendrite_mask[j : j + self.size, i : i + self.size]
-                            if dendrite.sum() >= 0.1 * self.size * self.size: # dendrite is at least 1% of image
+                            dendrite = dendrite_mask[j: j + self.size, i: i + self.size]
+                            if dendrite.sum() >= 0.1 * self.size * self.size:  # dendrite is at least 1% of image
                                 samples.append((group_name, k, j, i))
-                self.cache[group_name] = {"data" : data, "label" : label[:, :-1]}
+                self.cache[group_name] = {"data": data, "label": label[:, :-1]}
         return samples
 
     def __getitem__(self, index):
