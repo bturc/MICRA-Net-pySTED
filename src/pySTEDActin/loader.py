@@ -135,22 +135,33 @@ class pySTEDHDF5Dataset(Dataset):
         Generates a list of valid samples from the dataset. This is performed only
         once at each training
         """
-        samples = []
         with h5py.File(self.file_path, "r") as file:
             for group_name, group in tqdm(file.items(), desc="Groups", leave=False):
                 data = group[()].astype(numpy.float32)  # Images
-                print(data.shape)
-                exit()
-                label = group["label"][()]  # shape is Rings, Fibers, and Dendrite
-                shapes = group["label"].attrs["shapes"]  # Not all images have same shape
-                for k, (dendrite_mask, shape) in enumerate(zip(label[:, -1], shapes)):
-                    for j in range(0, shape[0], int(self.size * self.step)):
-                        for i in range(0, shape[1], int(self.size * self.step)):
-                            dendrite = dendrite_mask[j: j + self.size, i: i + self.size]
-                            if dendrite.sum() >= 0.1 * self.size * self.size:  # dendrite is at least 1% of image
-                                samples.append((group_name, k, j, i))
-                self.cache[group_name] = {"data": data, "label": label[:, :-1]}
+                samples = numpy.arange(0, data.shape[0])
+                for i in range(data.shape[0]):
+                    self.cache[i] = {
+                        "data": data[:, :, :, 0], "label": [data[:, :, :, 1][0, 0], data[:, :, :, 2][0, 0]]
+                    }
+
         return samples
+
+        # samples = []
+        # with h5py.File(self.file_path, "r") as file:
+        #     for group_name, group in tqdm(file.items(), desc="Groups", leave=False):
+        #         data = group[()].astype(numpy.float32)  # Images
+        #         print(data.shape)
+        #         exit()
+        #         label = group["label"][()]  # shape is Rings, Fibers, and Dendrite
+        #         shapes = group["label"].attrs["shapes"]  # Not all images have same shape
+        #         for k, (dendrite_mask, shape) in enumerate(zip(label[:, -1], shapes)):
+        #             for j in range(0, shape[0], int(self.size * self.step)):
+        #                 for i in range(0, shape[1], int(self.size * self.step)):
+        #                     dendrite = dendrite_mask[j: j + self.size, i: i + self.size]
+        #                     if dendrite.sum() >= 0.1 * self.size * self.size:  # dendrite is at least 1% of image
+        #                         samples.append((group_name, k, j, i))
+        #         self.cache[group_name] = {"data": data, "label": label[:, :-1]}
+        # return samples
 
     def __getitem__(self, index):
         """
@@ -161,17 +172,20 @@ class pySTEDHDF5Dataset(Dataset):
         :returns: A `torch.tensor` of the image
                   A `torch.tensor` of the label
         """
-        group_name, k, j, i = self.samples[index]
+        # group_name, k, j, i = self.samples[index]
+        #
+        # image_crop = self.cache[group_name]["data"][k, j : j + self.size, i : i + self.size]
+        # label_crop = self.cache[group_name]["label"][k, :, j : j + self.size, i : i + self.size]
+        #
+        # if image_crop.size != self.size*self.size:
+        #     image_crop = numpy.pad(image_crop, ((0, self.size - image_crop.shape[0]), (0, self.size - image_crop.shape[1])), "constant")
+        #     label_crop = numpy.pad(label_crop, ((0, 0), (0, self.size - label_crop.shape[1]), (0, self.size - label_crop.shape[2])), "constant")
+        #
+        # image = image_crop.astype(numpy.float32)
+        # label = numpy.sum(label_crop > 0, axis=(1, 2)) > (0.05 * self.size * self.size)
 
-        image_crop = self.cache[group_name]["data"][k, j : j + self.size, i : i + self.size]
-        label_crop = self.cache[group_name]["label"][k, :, j : j + self.size, i : i + self.size]
-
-        if image_crop.size != self.size*self.size:
-            image_crop = numpy.pad(image_crop, ((0, self.size - image_crop.shape[0]), (0, self.size - image_crop.shape[1])), "constant")
-            label_crop = numpy.pad(label_crop, ((0, 0), (0, self.size - label_crop.shape[1]), (0, self.size - label_crop.shape[2])), "constant")
-
-        image = image_crop.astype(numpy.float32)
-        label = numpy.sum(label_crop > 0, axis=(1, 2)) > (0.05 * self.size * self.size)
+        image = self.samples[index]["data"]
+        label = self.samples[index]["label"]
 
         # Applies data augmentation
         if not self.validation:
@@ -195,7 +209,7 @@ class pySTEDHDF5Dataset(Dataset):
 
         x = torch.tensor(image, dtype=torch.float32)
         y = torch.tensor(label, dtype=torch.float32)
-        return x, y, group_name, k, j, i
+        return x, y
 
     def __len__(self):
         return len(self.samples)
