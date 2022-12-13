@@ -1,6 +1,7 @@
 import os.path
 import datetime
 import glob
+from natsort import natsorted
 import h5py
 import torch
 import numpy as np
@@ -69,10 +70,13 @@ trainer_params = {
 }
 train_dataset = loader.ActinHDF5Dataset(trainer_params["hdf5_training_path"], **trainer_params)
 
+def splitter(_str):
+    int_val = int(_str.split(".")[-2])
+
 # resize all images and load into a single dataset
 with h5py.File(h5file, 'w') as h5f:
     img_ds = h5f.create_dataset("data", shape=(nfiles, IMG_WIDTH, IMG_HEIGHT, 2), dtype=float)
-    for cnt, ifile in enumerate(sorted(glob.iglob(pySTED_acqs_path), key=int)):
+    for cnt, ifile in enumerate(natsorted(glob.iglob(pySTED_acqs_path))):
         print(ifile)
         img = np.load(ifile)
         img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
