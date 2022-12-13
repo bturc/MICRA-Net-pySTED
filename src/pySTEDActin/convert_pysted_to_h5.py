@@ -77,19 +77,9 @@ def splitter(_str):
 with h5py.File(h5file, 'w') as h5f:
     img_ds = h5f.create_dataset("data", shape=(nfiles, IMG_WIDTH, IMG_HEIGHT, 2), dtype=float)
     for cnt, ifile in enumerate(natsorted(glob.iglob(pySTED_acqs_path))):
-        print(ifile)
+        print(ifile, cnt)
         img = np.load(ifile)
         img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
-
-        og_img_data = train_dataset[cnt]
-        og_img = og_img_data[0].numpy()
-
-        fig, axes = plt.subplots(1, 2)
-
-        axes[0].imshow(og_img, cmap="hot")
-        axes[1].imshow(img_normalized, cmap="hot")
-
-        plt.show()
 
         img_ds[cnt:cnt + 1:, :, :, 0] = img_normalized
 
