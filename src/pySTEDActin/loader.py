@@ -47,6 +47,7 @@ class HDF5Dataset(Dataset):
         with h5py.File(self.file_path, "r") as file:
             for group_name, group in tqdm(file.items(), desc="Groups", leave=False):
                 data = group[()].astype(numpy.float32) # Images
+                print(data)
                 #### label = group["label"][()] # shape is Rings, Fibers, and Dendrite
                 #### shapes = group["label"].attrs["shapes"] # Not all images have same shape
                 for k, (dendrite_mask, shape) in enumerate(zip(label[:, -1], shapes)):
