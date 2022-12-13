@@ -16,6 +16,8 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from collections import defaultdict
 
+import sys
+sys.path.append("/src/")
 from src import ActinHDF5Dataset as loader
 from src import ActinMICRANet as network
 
