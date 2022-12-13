@@ -6,6 +6,9 @@ import torch
 import numpy as np
 import loader
 #### import cv2
+import matplotlib
+from matplotlib import pyplot as plt
+matplotlib.use('tkagg')
 
 IMG_WIDTH = 256
 IMG_HEIGHT = 256
@@ -74,7 +77,14 @@ with h5py.File(h5file, 'w') as h5f:
         img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
 
         og_img_data = train_dataset[cnt]
-        print(og_img_data[1], cnt)
+        og_img = og_img_data[0].numpy()
+
+        fig, axes = plt.subplots(1, 2)
+
+        axes[0].imshow(og_img, cmap="hot")
+        axes[1].imshow(img_normalized, cmap="hot")
+
+        plt.show()
 
         img_ds[cnt:cnt + 1:, :, :, 0] = img_normalized
 
