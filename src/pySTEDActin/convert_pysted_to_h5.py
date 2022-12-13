@@ -5,8 +5,8 @@ import h5py
 import numpy as np
 #### import cv2
 
-IMG_WIDTH = 30
-IMG_HEIGHT = 30
+IMG_WIDTH = 256
+IMG_HEIGHT = 256
 
 h5file = os.path.expanduser("~/Downloads/MICRA-Net/training_pySTED.hdf5")
 pySTED_acqs_path = os.path.expanduser(
@@ -18,9 +18,11 @@ print(f'count of image files nfiles={nfiles}')
 
 # resize all images and load into a single dataset
 with h5py.File(h5file,'w') as  h5f:
-    img_ds = h5f.create_dataset('images',shape=(nfiles, IMG_WIDTH, IMG_HEIGHT,3), dtype=int)
+    img_ds = h5f.create_dataset('images',shape=(nfiles, IMG_WIDTH, IMG_HEIGHT), dtype=float)
     for cnt, ifile in enumerate(glob.iglob(pySTED_acqs_path)):
         img = np.load(ifile)
+        print(np.max(img), np.min(img))
+        exit()
         img_ds[cnt:cnt + 1:, :, :] = img
         #### img = cv2.imread(ifile, cv2.IMREAD_COLOR)
         # or use cv2.IMREAD_GRAYSCALE, cv2.IMREAD_UNCHANGED
