@@ -16,8 +16,8 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from collections import defaultdict
 
-from src.Actin import loader
-from src.Actin import network
+from src import ActinHDF5Dataset as loader
+from src import ActinMICRANet as network
 
 def create_savefolder(params, dry_run=False):
     """
