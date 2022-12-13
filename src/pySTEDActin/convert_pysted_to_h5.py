@@ -75,14 +75,17 @@ def splitter(_str):
 
 # resize all images and load into a single dataset
 with h5py.File(h5file, 'w') as h5f:
-    img_ds = h5f.create_dataset("data", shape=(nfiles, IMG_WIDTH, IMG_HEIGHT, 2), dtype=float)
+    img_ds = h5f.create_dataset("data", shape=(nfiles, IMG_WIDTH, IMG_HEIGHT, 3), dtype=float)
     for cnt, ifile in enumerate(natsorted(glob.iglob(pySTED_acqs_path))):
         img = np.load(ifile)
         img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
 
         og_img_data = train_dataset[cnt]
         og_label = og_img_data[1].numpy()
+        class_1_label = np.zeros(img_normalized.shape) + og_label[0]
+        class_2_label = np.zeros(img_normalized.shape) + og_label[1]
 
         img_ds[cnt:cnt + 1:, :, :, 0] = img_normalized
 
-        img_ds[cnt:cnt + 1:, :, :, 1] = og_label
+        img_ds[cnt:cnt + 1:, :, :, 1] = class_1_label
+        img_ds[cnt:cnt + 1:, :, :, 2] = class_2_label
