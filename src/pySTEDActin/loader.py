@@ -106,7 +106,7 @@ class ActinHDF5Dataset(Dataset):
     def __len__(self):
         return len(self.samples)
 
-class HDF5Dataset(Dataset):
+class pySTEDHDF5Dataset(Dataset):
     """
     Creates a `Dataset` from a HDF5 file. It loads all the HDF5 file in cache. This
     increases the loading speed.
@@ -118,7 +118,7 @@ class HDF5Dataset(Dataset):
     :param step: (optional) The step between each crops
     """
     def __init__(self, file_path, data_aug=0, validation=False, size=256, step=0.75, **kwargs):
-        super(HDF5Dataset, self).__init__()
+        super(pySTEDHDF5Dataset, self).__init__()
 
         self.file_path = file_path
         self.size = size
