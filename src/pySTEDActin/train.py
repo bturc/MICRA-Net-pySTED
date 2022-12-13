@@ -198,9 +198,9 @@ if __name__ == "__main__":
         json.dump(trainer_params, open(os.path.join(output_folder, "trainer_params.json"), "w"), indent=4, sort_keys=True)
 
         # Creation of the loaders
-        train_dataset = loader.HDF5Dataset(trainer_params["hdf5_training_path"], **trainer_params)
+        train_dataset = loader.pySTEDHDF5Dataset(trainer_params["hdf5_training_path"], **trainer_params)
         train_loader = DataLoader(train_dataset, **trainer_params["dataloader_params"])
-        valid_dataset = loader.HDF5Dataset(trainer_params["hdf5_validation_path"], validation=True, **trainer_params)
+        valid_dataset = loader.ActinHDF5Dataset(trainer_params["hdf5_validation_path"], validation=True, **trainer_params)
         valid_loader = DataLoader(valid_dataset, **trainer_params["dataloader_params"])
 
         model = network.MICRANet(**trainer_params, **trainer_params["model_params"])
