@@ -30,8 +30,8 @@ hdf5_testing_path = f"{PATH}/datasets/testing_01-04-19.hdf5"
 pos_weight = [3.3, 1.6]
 dry_run = True
 lr, epochs, min_valid_loss = 1e-3, 250 if not dry_run else 1, np.inf
-seed = 0
-add_to_seed = -1
+seed = 42
+add_to_seed = 0
 trainer_params = {
     "model_name" : "_".join((current_datetime, str(seed + add_to_seed))),
     "savefolder" : f"{PATH}/Results",
