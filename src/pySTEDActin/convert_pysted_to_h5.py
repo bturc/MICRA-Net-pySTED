@@ -10,7 +10,7 @@ IMG_HEIGHT = 30
 
 h5file = os.path.expanduser("~/Downloads/MICRA-Net/training_pySTED.hdf5")
 pySTED_acqs_path = os.path.expanduser(
-    "~/Documents/a22_docs/micranet_dataset_test/datamaps_processed/acqs_bckgrnd_1000000/*.ppm"
+    "~/Documents/a22_docs/micranet_dataset_test/datamaps_processed/acqs_bckgrnd_1000000/*.npy"
 )
 
 nfiles = len(glob.glob(pySTED_acqs_path))
