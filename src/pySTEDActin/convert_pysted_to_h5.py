@@ -8,7 +8,7 @@ import numpy as np
 IMG_WIDTH = 256
 IMG_HEIGHT = 256
 
-h5file = os.path.expanduser("~/Downloads/MICRA-Net/training_pySTED.hdf5")
+h5file = os.path.expanduser("~/Downloads/MICRA-Net/datasets/training_pySTED.hdf5")
 pySTED_acqs_path = os.path.expanduser(
     "~/Documents/a22_docs/micranet_dataset_test/datamaps_processed/acqs_bckgrnd_1000000/*.npy"
 )
