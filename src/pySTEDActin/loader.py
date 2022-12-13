@@ -26,7 +26,7 @@ class ActinHDF5Dataset(Dataset):
     :param step: (optional) The step between each crops
     """
     def __init__(self, file_path, data_aug=0, validation=False, size=256, step=0.75, **kwargs):
-        super(HDF5Dataset, self).__init__()
+        super(ActinHDF5Dataset, self).__init__()
 
         self.file_path = file_path
         self.size = size
