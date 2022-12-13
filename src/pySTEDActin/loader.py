@@ -184,8 +184,8 @@ class pySTEDHDF5Dataset(Dataset):
         # image = image_crop.astype(numpy.float32)
         # label = numpy.sum(label_crop > 0, axis=(1, 2)) > (0.05 * self.size * self.size)
 
-        image = self.samples[index]["data"]
-        label = self.samples[index]["label"]
+        image = self.cache[index]["data"]
+        label = self.cache[index]["label"]
 
         # Applies data augmentation
         if not self.validation:
