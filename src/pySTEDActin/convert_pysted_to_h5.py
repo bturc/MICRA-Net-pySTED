@@ -49,7 +49,7 @@ trainer_params = {
     "hdf5_validation_path" : hdf5_validation_path,
     "hdf5_testing_path" : hdf5_testing_path,
     "dataloader_params" : {
-        "shuffle" : True,
+        "shuffle" : False,
         "num_workers" : 4,
         "pin_memory" : True,
         "drop_last" : True,
