@@ -72,7 +72,7 @@ train_dataset = loader.ActinHDF5Dataset(trainer_params["hdf5_training_path"], **
 # resize all images and load into a single dataset
 with h5py.File(h5file, 'w') as h5f:
     img_ds = h5f.create_dataset("data", shape=(nfiles, IMG_WIDTH, IMG_HEIGHT, 2), dtype=float)
-    for cnt, ifile in enumerate(glob.iglob(pySTED_acqs_path)):
+    for cnt, ifile in enumerate(sorted(glob.iglob(pySTED_acqs_path))):
         print(ifile)
         img = np.load(ifile)
         img_normalized = (img - np.min(img)) / (np.max(img) - np.min(img))
